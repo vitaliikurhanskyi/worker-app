@@ -15,15 +15,19 @@ use App\Http\Controllers\WorkerController;
 */
 
 Route::get('/', function () {
-    return "The video 7 is finish";
+    return "The video 10 is finish <div><a href=\"/workers\">Go</a></div>";
 });
 
 Route::get('/workers', [WorkerController::class, 'index'])->name('workers.index');
 
+Route::get('/workers/create', [WorkerController::class, 'create'])->name('workers.create');
+
 Route::get('/workers/{worker}', [WorkerController::class, 'show'])->name('workers.show');
 
-// Route::get('/workers/create', [WorkerController::class, 'create'])->name('workers.create');
+Route::post('/workers', [WorkerController::class, 'store'])->name('workers.store');
 
-// Route::get('/workers/update', [WorkerController::class, 'update'])->name('workers.update');
+Route::get('/workers/{worker}/edit', [WorkerController::class, 'edit'])->name('workers.edit');
 
-// Route::get('/workers/delete', [WorkerController::class, 'delete'])->name('workers.delete');
+Route::patch('/workers/{worker}', [WorkerController::class, 'update'])->name('workers.update');
+
+Route::delete('/workers/{worker}', [WorkerController::class, 'delete'])->name('workers.delete');

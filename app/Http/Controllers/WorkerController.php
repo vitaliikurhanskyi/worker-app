@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Worker\StoreRequest;
+use App\Http\Requests\Worker\UpdateRequest;
 use App\Models\Worker;
 use Illuminate\Http\Request;
 
@@ -21,38 +23,28 @@ class WorkerController extends Controller
     }
 
     public function create() {
-        $worker = [
-            'name' => 'John2',
-            'surname' => 'Dou2',
-            'email' => 'test2@test.com',
-            'age' => 34,
-            'description' => 'test description',
-            'is_married' => false
-        ];
-
-        Worker::create([
-            'name' => $worker['name'],
-            'surname' => $worker['surname'],
-            'email' => $worker['email'],
-            'age' => $worker['age'],
-            'description' => $worker['description'],
-            'is_married' => $worker['is_married']
-        ]);
-        return 'Worker was created';
+        return view('worker.create');
     }
 
-    public function update() {
-        $worker = Worker::find(1);
-        $worker->update([
-            'name' => 'Karel',
-            'surname' => 'Ivano'
-        ]);
-        return 'Was updated';
+    public function store(StoreRequest $request) {
+        $data = $request->validated();
+        Worker::create($data);
+        return redirect()->route('workers.index');
     }
 
-    public function delete() {
-        $worker = Worker::find(1);
+    public function edit(Worker $worker) {
+        return view('worker.edit', compact('worker'));
+    }
+
+    public function update(UpdateRequest $request, Worker $worker) {
+        $data = $request->validated();
+        $worker->update($data);
+        return redirect()->route('workers.show', $worker->id);
+    }
+
+    public function delete($id) {
+        $worker = Worker::findOrFail($id);
         $worker->delete();
-        return "wanker was delete";
+        return redirect()->route('workers.index');
     }
 }
