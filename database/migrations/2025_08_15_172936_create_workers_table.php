@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('position_id')->nullable()->index()->constrained('positions');
             $table->string('name');
             $table->string('surname');
             $table->string('email');
             $table->integer('age')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_married')->default(false);
-            $table->timestamps();
+            $table->timestamps();     
         });
     }
 

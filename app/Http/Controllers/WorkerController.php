@@ -13,6 +13,7 @@ class WorkerController extends Controller
     public function index(IndexRequest $filter) 
     {
         $data = $filter->validated();
+
         $workerQuery = Worker::query();
 
         if(isset($data['name'])) {
@@ -44,8 +45,6 @@ class WorkerController extends Controller
             //dump($data['is_married']);
         }
 
-        
-
         $workers = $workerQuery->paginate(4);
 
         //$workers = Worker::paginate(4);
@@ -65,7 +64,9 @@ class WorkerController extends Controller
     public function store(StoreRequest $request) 
     {
         $data = $request->validated();
+
         Worker::create($data);
+
         return redirect()->route('workers.index');
     }
 
@@ -77,14 +78,18 @@ class WorkerController extends Controller
     public function update(UpdateRequest $request, Worker $worker) 
     {
         $data = $request->validated();
+
         $worker->update($data);
+
         return redirect()->route('workers.show', $worker->id);
     }
 
     public function delete($id) 
     {
         $worker = Worker::findOrFail($id);
+
         $worker->delete();
+
         return redirect()->route('workers.index');
     }
 }
