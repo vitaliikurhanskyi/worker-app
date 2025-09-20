@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Department;
 use App\Models\Position;
 use App\Models\Worker;
 use App\Models\Profile;
@@ -32,7 +33,7 @@ class DevCommand extends Command
 	 */
 	public function handle()
 	{
-		//$this->prepareData();
+		// $this->prepareData();
 
 		// $profile = Profile::find(1);
 		// $worker = Worker::find($profile->worker_id);
@@ -43,11 +44,10 @@ class DevCommand extends Command
 		// dd($profile->toArray());
 
 		// $profile = Profile::find(1);
-
 		// dump($profile->worker->toArray());
 
-		// $worker = Worker::find(1);
 
+		// $worker = Worker::find(1);
 		// dd($worker->profile->toArray());
 
 		// $position = Position::find(1);
@@ -66,19 +66,54 @@ class DevCommand extends Command
 		// $position = Position::find(1);
 		// dump($position->workers);
 
-		//$this->prepareManyToMany();
 
-		$project = Project::find(1);
+
+		// $this->prepareManyToMany();
+
+		// $project = Project::find(1);
 		// $projectWorkers = ProjectWorker::where('project_id', $project->id)->get();
 		// $workerIds = $projectWorkers->pluck('worker_id')->toArray();
 		// $workers = Worker::whereIn('id', $workerIds)->get();
 		// dd($workers->toArray());
+		// dd($project->workers->toArray());
+		// $worker = Worker::find(7);
+		// dd($worker->projects->toArray());
 
-		//dd($project->workers->toArray());
 
-		$worker = Worker::find(7);
+		// $worker = Worker::find(1);
+		// $project = Project::find(1);
+		// $worker->projects()->attach($project->id);
+		// $worker->projects()->toggle($project->id);
 
-		dd($worker->projects->toArray());
+		//for example
+		// $project->workers()->attach(array());
+		// $project->workers()->detach();
+		// $project->workers()->sync();
+		// $worker->projects()->toggle($project->id);
+
+
+		// 22. Отношение один к одному через //
+
+		// $department = Department::find(1);
+		// $positionBoss = Position::where('department_id', $department->id)->where('title', 'Boss')->first();
+		// $worker = Worker::where('position_id', $positionBoss->id)->first();
+		// dd($worker);
+
+		// dd($department->boss);
+
+		// $worker = Worker::find(7);
+		// dd($worker->position->department);
+
+
+
+		// 23. Отношение один ко многим через //
+
+		// $department = Department::find(2);
+		// dd($department->workers->toArray());
+
+		$worker = Worker::find(9);
+		dd($worker->position->department->toArray());
+
 
 
 
@@ -88,16 +123,27 @@ class DevCommand extends Command
 	public function prepareData()
 	{
 
+		$department1 = Department::create([
+			'title' => 'IT'
+		]);
+
+		$department2 = Department::create([
+			'title' => 'Analitics'
+		]);
+
 		$position1 = Position::create([
-			'title' => 'developer'
+			'title' => 'developer',
+			'department_id' => $department1->id
 		]);
 
 		$position2 = Position::create([
-			'title' => 'manager'
+			'title' => 'manager',
+			'department_id' => $department1->id
 		]);
 
 		$position3 = Position::create([
-			'title' => 'designer'
+			'title' => 'designer',
+			'department_id' => $department1->id
 		]);
 
 		$workerData1 = [
