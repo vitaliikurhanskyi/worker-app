@@ -221,6 +221,18 @@ class DevCommand extends Command
 
 
 
+		// 28. Отношения с сортировкой или выборкой
+		// $position = Position::first();
+		// dump($position->maxAgeWorker->toArray());
+		// dd($position->minAgeWorker->toArray());
+		
+		$position = Position::find(3);
+		dd($position->queryWorkerByName->toArray());
+
+
+
+
+
 		return 0;
 	}
 

@@ -24,4 +24,19 @@ class Position extends Model
 		// return $this->belongsTo(Department::class, 'department_id', 'id');
 		return $this->belongsTo(Department::class);
 	}
+
+	public function maxAgeWorker()
+	{
+		return $this->hasOne(Worker::class)->ofMany('age', 'max');
+	}
+
+	public function minAgeWorker()
+	{
+		return $this->hasOne(Worker::class)->ofMany('age', 'min');
+	}
+
+	public function queryWorkerByName()
+	{
+		return $this->hasOne(Worker::class)->where('surname', 'Dell');
+	}
 }
