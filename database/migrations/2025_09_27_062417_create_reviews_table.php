@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_worker', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->index()->constrained('projects');
-            $table->foreignId('worker_id')->index()->constrained('workers');
-            //$table->unique(['project_id', 'worker_id']);
+			$table->text('body');
             $table->timestamps();
+
+			$table->unsignedBigInteger('reviewable_id');
+			$table->string('reviewable_type');
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_workers');
+        Schema::dropIfExists('reviews');
     }
 };

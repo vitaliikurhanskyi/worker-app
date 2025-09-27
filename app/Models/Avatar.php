@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectWorker extends Model
+class Avatar extends Model
 {
     use HasFactory;
 
-    protected $table = "project_worker";
+	protected $table = "avatars";
 
-    protected $guarded = false;
+	protected $guarded = false;
+
+	public function avatarable()
+	{
+		return $this->morphTo();
+	}
 }

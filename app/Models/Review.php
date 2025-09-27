@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectWorker extends Model
+class Review extends Model
 {
     use HasFactory;
 
-    protected $table = "project_worker";
+	protected $table = "reviews";
 
-    protected $guarded = false;
+	protected $guarded = false;
+
+	public function reviewable()
+	{
+		return $this->morphTo();
+	}
 }

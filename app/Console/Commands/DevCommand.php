@@ -2,12 +2,16 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Avatar;
+use App\Models\Client;
 use App\Models\Department;
 use App\Models\Position;
 use App\Models\Worker;
-use App\Models\Profile;
+//use App\Models\Profile;
 use App\Models\Project;
-use App\Models\ProjectWorker;
+use App\Models\Review;
+use App\Models\Tag;
+//use App\Models\ProjectWorker;
 use Illuminate\Console\Command;
 
 class DevCommand extends Command
@@ -111,8 +115,108 @@ class DevCommand extends Command
 		// $department = Department::find(2);
 		// dd($department->workers->toArray());
 
-		$worker = Worker::find(9);
-		dd($worker->position->department->toArray());
+		// $worker = Worker::find(9);
+		// dd($worker->position->department->toArray());
+
+
+
+
+		// 24. Отношения с конвенцией Laravel
+		// $this->prepareData();
+		// $this->prepareManyToMany();
+
+		//$worker = Worker::find(4);
+		// dd($worker->profile->toArray());
+		//dd($worker->projects->toArray());
+
+
+
+
+		// 25. Отношение один к одному полиморф
+		// $this->prepareData();
+		// $this->prepareManyToMany();
+
+		// $worker = Worker::find(5);
+		// $worker->avatar()->create([
+		// 	'path' => 'some path'
+		// ]);
+
+		// $client = Client::find(2);
+		// $client->avatar()->create([
+		// 	'path' => 'client path'
+		// ]);
+
+		// $avatar = Avatar::find(2);
+		// dd($avatar->avatarable->toArray());
+
+
+
+
+
+		// 26. Отношение один ко многим полиморф
+		// $this->prepareData();
+		// $this->prepareManyToMany();
+
+		// $worker = Worker::find(5);
+		// $client = Client::find(2);
+
+		// $worker->reviews()->create([
+		// 	'body' => 'review 1'
+		// ]);
+
+		// $worker->reviews()->create([
+		// 	'body' => 'review 2'
+		// ]);
+
+		// $worker->reviews()->create([
+		// 	'body' => 'review 3'
+		// ]);
+
+		// $client->reviews()->create([
+		// 	'body' => 'review 1'
+		// ]);
+
+		// $client->reviews()->create([
+		// 	'body' => 'review 2'
+		// ]);
+
+		// $client->reviews()->create([
+		// 	'body' => 'review 3'
+		// ]);
+
+		// //dd($worker->reviews->toArray());
+
+		// $review = Review::find(1);
+		// dd($review->reviewable->toArray());
+
+
+
+
+
+		
+		
+		
+		// 27. Отношение многие ко многим полиморф
+		// Tag::create([
+		// 	'title' => 'tag 1'
+		// ]);
+
+		// Tag::create([
+		// 	'title' => 'tag 2'
+		// ]);
+
+		// Tag::create([
+		// 	'title' => 'tag 3'
+		// ]);
+
+		// $worker = Worker::find(1);
+		// $client = Client::find(2);
+		// $worker->tags()->attach([1, 3]);
+		// $client->tags()->attach([2, 3]);
+
+		// $tag = Tag::find(3);
+		// dd($tag->workers->toArray());
+
 
 
 
@@ -122,6 +226,19 @@ class DevCommand extends Command
 
 	public function prepareData()
 	{
+
+		Client::create([
+			'name' => 'Bob'
+		]);
+
+		Client::create([
+			'name' => 'John'
+		]);
+
+		Client::create([
+			'name' => 'Elena'
+		]);
+
 
 		$department1 = Department::create([
 			'title' => 'IT'
@@ -225,7 +342,7 @@ class DevCommand extends Command
 		$worker7 = Worker::create($workerData7);
 
 		$profileData1 = [
-			'worker_id' => $worker1->id,
+			// 'worker_id' => $worker1->id,
 			'city' => 'Los Angeles',
 			'skill' => 'Track Driver',
 			'experiens' => 10,
@@ -233,7 +350,7 @@ class DevCommand extends Command
 		];
 
 		$profileData2 = [
-			'worker_id' => $worker2->id,
+			// 'worker_id' => $worker2->id,
 			'city' => 'Denwer',
 			'skill' => 'Developer PHP',
 			'experiens' => 2,
@@ -241,7 +358,7 @@ class DevCommand extends Command
 		];
 
 		$profileData3 = [
-			'worker_id' => $worker3->id,
+			// 'worker_id' => $worker3->id,
 			'city' => 'Milan',
 			'skill' => 'Musician',
 			'experiens' => 12,
@@ -249,7 +366,7 @@ class DevCommand extends Command
 		];
 
 		$profileData4 = [
-			'worker_id' => $worker4->id,
+			// 'worker_id' => $worker4->id,
 			'city' => 'Lodz',
 			'skill' => 'Manager',
 			'experiens' => 12,
@@ -257,7 +374,7 @@ class DevCommand extends Command
 		];
 
 		$profileData5 = [
-			'worker_id' => $worker5->id,
+			// 'worker_id' => $worker5->id,
 			'city' => 'Berlin',
 			'skill' => 'Designer',
 			'experiens' => 14,
@@ -265,7 +382,7 @@ class DevCommand extends Command
 		];
 
 		$profileData6 = [
-			'worker_id' => $worker6->id,
+			// 'worker_id' => $worker6->id,
 			'city' => 'San Fran',
 			'skill' => 'Front-end developer',
 			'experiens' => 14,
@@ -273,20 +390,27 @@ class DevCommand extends Command
 		];
 
 		$profileData7 = [
-			'worker_id' => $worker7->id,
+			// 'worker_id' => $worker7->id,
 			'city' => 'Ney York',
 			'skill' => 'Front-end developer',
 			'experiens' => 14,
 			'finished_study_at' => '2025-02-01'
 		];
-
-		$profile1 = Profile::create($profileData1);
-		$profile2 = Profile::create($profileData2);
-		$profile3 = Profile::create($profileData3);
-		$profile3 = Profile::create($profileData4);
-		$profile3 = Profile::create($profileData5);
-		$profile3 = Profile::create($profileData6);
-		$profile3 = Profile::create($profileData7);
+		
+		//$profile1 = Profile::create($profileData1);
+		// $profile2 = Profile::create($profileData2);
+		// $profile3 = Profile::create($profileData3);
+		// $profile3 = Profile::create($profileData4);
+		// $profile3 = Profile::create($profileData5);
+		// $profile3 = Profile::create($profileData6);
+		// $profile3 = Profile::create($profileData7);
+		$worker1->profile()->create($profileData1);
+		$worker2->profile()->create($profileData2);
+		$worker3->profile()->create($profileData3);
+		$worker4->profile()->create($profileData4);
+		$worker5->profile()->create($profileData5);
+		$worker6->profile()->create($profileData6);
+		$worker7->profile()->create($profileData7);
 
 		return Command::SUCCESS;
 	}
@@ -310,46 +434,60 @@ class DevCommand extends Command
 
 		// Project 1
 
-		ProjectWorker::create([
-			'project_id' => $project1->id,
-			'worker_id' => $workerManager->id
-		]);
+		// ProjectWorker::create([
+		// 	'project_id' => $project1->id,
+		// 	'worker_id' => $workerManager->id
+		// ]);
 
-		ProjectWorker::create([
-			'project_id' => $project1->id,
-			'worker_id' => $workerBackend->id
-		]);
+		// ProjectWorker::create([
+		// 	'project_id' => $project1->id,
+		// 	'worker_id' => $workerBackend->id
+		// ]);
 
-		ProjectWorker::create([
-			'project_id' => $project1->id,
-			'worker_id' => $workerDesigner1->id
-		]);
+		// ProjectWorker::create([
+		// 	'project_id' => $project1->id,
+		// 	'worker_id' => $workerDesigner1->id
+		// ]);
 
-		ProjectWorker::create([
-			'project_id' => $project1->id,
-			'worker_id' => $workerFrontEnd1->id
-		]);
+		// ProjectWorker::create([
+		// 	'project_id' => $project1->id,
+		// 	'worker_id' => $workerFrontEnd1->id
+		// ]);
 
 		// Project 2
 
-		ProjectWorker::create([
-			'project_id' => $project2->id,
-			'worker_id' => $workerManager->id
+		// ProjectWorker::create([
+		// 	'project_id' => $project2->id,
+		// 	'worker_id' => $workerManager->id
+		// ]);
+
+		// ProjectWorker::create([
+		// 	'project_id' => $project2->id,
+		// 	'worker_id' => $workerBackend->id
+		// ]);
+
+		// ProjectWorker::create([
+		// 	'project_id' => $project2->id,
+		// 	'worker_id' => $workerDesigner2->id
+		// ]);
+
+		// ProjectWorker::create([
+		// 	'project_id' => $project2->id,
+		// 	'worker_id' => $workerFrontEnd2->id
+		// ]);
+
+		$project1->workers()->attach([
+			$workerManager->id,
+			$workerBackend->id,
+			$workerDesigner1->id,
+			$workerFrontEnd1->id
 		]);
 
-		ProjectWorker::create([
-			'project_id' => $project2->id,
-			'worker_id' => $workerBackend->id
-		]);
-
-		ProjectWorker::create([
-			'project_id' => $project2->id,
-			'worker_id' => $workerDesigner2->id
-		]);
-
-		ProjectWorker::create([
-			'project_id' => $project2->id,
-			'worker_id' => $workerFrontEnd2->id
+		$project2->workers()->attach([
+			$workerManager->id,
+			$workerBackend->id,
+			$workerDesigner2->id,
+			$workerFrontEnd2->id
 		]);
 	}
 }

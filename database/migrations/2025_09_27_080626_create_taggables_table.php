@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_worker', function (Blueprint $table) {
+        Schema::create('taggables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->index()->constrained('projects');
-            $table->foreignId('worker_id')->index()->constrained('workers');
-            //$table->unique(['project_id', 'worker_id']);
             $table->timestamps();
+
+			$table->unsignedBigInteger('tag_id');
+			//$table->foreignId('tag_id')->index()->constrained('tags');
+			$table->unsignedBigInteger('taggable_id');
+			$table->string('taggable_type');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_workers');
+        Schema::dropIfExists('taggables');
     }
 };

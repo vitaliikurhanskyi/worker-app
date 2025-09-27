@@ -15,7 +15,7 @@ use App\Http\Controllers\WorkerController;
 */
 
 Route::get('/', function () {
-    return "The video 18 is finish <div><a href=\"/workers\">Go</a></div>";
+    return "The video 25 is finish <div><a href=\"/workers\">Go</a></div>";
 });
 
 Route::get('/workers', [WorkerController::class, 'index'])->name('workers.index');

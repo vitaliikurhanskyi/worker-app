@@ -15,7 +15,8 @@ class Department extends Model
 
 	public function boss()
 	{
-		return $this->hasOneThrough(Worker::class, Position::class, 'department_id', 'position_id', 'id', 'id')->where('position_id', 4);
+		// return $this->hasOneThrough(Worker::class, Position::class, 'department_id', 'position_id', 'id', 'id')->where('position_id', 4);
+		return $this->hasOneThrough(Worker::class, Position::class)->where('position_id', 4);
 	}
 
 	public function workers()
