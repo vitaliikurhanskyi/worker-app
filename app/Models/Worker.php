@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Events\Worker\CreateEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Profile;
 
 class Worker extends Model
 {
@@ -12,6 +14,18 @@ class Worker extends Model
 	protected $table = "workers";
 
 	protected $guarded = false;
+
+	protected static function booted()
+	{
+		parent::created(function($model) {
+
+			event(new CreateEvent($model));
+
+			// Profile::create([
+			// 	'worker_id' => $model->id
+			// ]);
+		});
+	}
 
 	public function profile()
 	{
