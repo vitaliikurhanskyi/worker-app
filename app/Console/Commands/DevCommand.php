@@ -226,8 +226,8 @@ class DevCommand extends Command
 		// dump($position->maxAgeWorker->toArray());
 		// dd($position->minAgeWorker->toArray());
 		
-		$position = Position::find(3);
-		dd($position->queryWorkerByName->toArray());
+		// $position = Position::find(3);
+		// dd($position->queryWorkerByName->toArray());
 
 
 
