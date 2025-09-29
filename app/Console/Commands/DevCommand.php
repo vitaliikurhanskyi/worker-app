@@ -233,6 +233,17 @@ class DevCommand extends Command
 
 
 
+		// 32. Событие обновления
+		$worker = Worker::find(1);
+		$worker->update([
+			//'name' => 'Updated name Alex',
+			'age' => '29.000'
+		]);
+
+
+
+
+
 		return 0;
 	}
 

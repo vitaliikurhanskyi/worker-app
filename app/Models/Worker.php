@@ -25,6 +25,17 @@ class Worker extends Model
 			// 	'worker_id' => $model->id
 			// ]);
 		});
+
+		static::updated(function($model){
+			//dd($model);
+			if($model->wasChanged() && $model->getOriginal('age') != $model->getAttributes()['age']){
+				// dump('This is original -> ' , $model->getOriginal('age'), 'This is atributes -> ' , $model->getAttributes()['age']);
+				// dump($model->getOriginal('age') === $model->getAttributes()['age']);
+				//dump((int)$model->getOriginal('age') === (int)$model->getAttributes()['age']);
+				dd('event who change the age was changed');
+			}
+		});
+
 	}
 
 	public function profile()
