@@ -5,7 +5,7 @@
         <p>Worker name: {{$worker->name}}</p>
         <p>Worker lastname: {{$worker->surname}}</p>
         <p>Worker age: {{ $worker->age }} </p>
-        <p>Worker position: {{ $worker->profile->skill }}</p>
+        <p>Worker position: {{ $worker->position->title }}</p>
         <form action="{{ route('workers.delete', $worker->id) }}" method="POST">
             @csrf
             @method('Delete')

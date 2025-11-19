@@ -6,10 +6,12 @@ use App\Events\Worker\CreateEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Profile;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Worker extends Model
 {
 	use HasFactory;
+	use SoftDeletes;
 
 	protected $table = "workers";
 
@@ -27,7 +29,7 @@ class Worker extends Model
 		});
 
 		static::updated(function($model){
-			//dd($model);
+			// dd($model);
 			if($model->wasChanged() && $model->getOriginal('age') != $model->getAttributes()['age']){
 				// dump('This is original -> ' , $model->getOriginal('age'), 'This is atributes -> ' , $model->getAttributes()['age']);
 				// dump($model->getOriginal('age') === $model->getAttributes()['age']);
