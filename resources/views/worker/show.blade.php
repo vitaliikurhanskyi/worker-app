@@ -6,11 +6,13 @@
         <p>Worker lastname: {{$worker->surname}}</p>
         <p>Worker age: {{ $worker->age }} </p>
         <p>Worker position: {{ $worker->position->title ?? '' }}</p>
-        <form action="{{ route('workers.destroy', $worker->id) }}" method="POST">
-            @csrf
-            @method('Delete')
-            <input type="submit" value="Delete">
-        </form>
+		@can('delete', $worker)		
+			<form action="{{ route('workers.destroy', $worker->id) }}" method="POST">
+				@csrf
+				@method('Delete')
+				<input type="submit" value="Delete">
+			</form>
+		@endcan
         <br>
         <a href="{{ route('workers.index') }}">Back to the Worker List</a>
     </div>

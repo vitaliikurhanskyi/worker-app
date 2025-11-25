@@ -16,9 +16,13 @@
     </form>
 </div>
 <div>
-    <hr>
-    <a href="{{ route('workers.create') }}">Create New Worker</a>
-    <hr>
+
+	@can('create', \App\Model\Worker::class)
+		<hr>
+    		<a href="{{ route('workers.create') }}">Create New Worker</a>
+    	<hr>
+	@endcan
+    
 </div>
 <div>
     <h2>List of workers:</h2>
@@ -35,7 +39,9 @@
                 <p>Is married: {{ $worker->is_married ? "married" : "not married" }}</p>
                 <a href="{{ route('workers.show', $worker->id) }}">Show The Worker Info</a>
                 <br>
-                <a href="{{ route('workers.edit', $worker->id) }}">Edit the Worker Info</a>
+				@can('update', $worker)	
+                	<a href="{{ route('workers.edit', $worker->id) }}">Edit the Worker Info</a>
+				@endcan
             </li>
             <hr>
         @endforeach 

@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('workers', WorkerController::class);
+Route::resource('workers', WorkerController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';
 // require __DIR__.'/workers.php';

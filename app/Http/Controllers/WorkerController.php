@@ -58,11 +58,17 @@ class WorkerController extends Controller
 
     public function create()
     {
+
+		$this->authorize('create', Worker::class);
+
         return view('worker.create');
     }
 
     public function store(StoreRequest $request) 
     {
+
+		$this->authorize('create', Worker::class);
+
         $data = $request->validated();
 
         Worker::create($data);
@@ -72,11 +78,16 @@ class WorkerController extends Controller
 
     public function edit(Worker $worker) 
     {
+		$this->authorize('update', $worker);
+		
         return view('worker.edit', compact('worker'));
     }
 
     public function update(UpdateRequest $request, Worker $worker) 
     {
+
+		$this->authorize('update', $worker);
+
         $data = $request->validated();
 
         $worker->update($data);
@@ -84,18 +95,12 @@ class WorkerController extends Controller
         return redirect()->route('workers.show', $worker->id);
     }
 
-    public function delete($id) 
+	public function destroy(Worker $worker) 
     {
-        $worker = Worker::findOrFail($id);
 
-        $worker->delete();
+		$this->authorize('delete', $worker);
 
-        return redirect()->route('workers.index');
-    }
-
-	public function destroy($id) 
-    {
-        $worker = Worker::findOrFail($id);
+        $worker = Worker::findOrFail($worker->id);
 
         $worker->delete();
 
