@@ -25,7 +25,7 @@ class IndexRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string',
-            'surname' => 'nullable|string',
+            'surename' => 'nullable|string',
             'email' => 'nullable|email',
             'from' => 'nullable|integer',
             'to' => 'nullable|integer',
