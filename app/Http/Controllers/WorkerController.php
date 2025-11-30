@@ -15,11 +15,14 @@ class WorkerController extends Controller
     {
         $data = $filter->validated();
 
-        $workerQuery = Worker::query();
-
+        //$workerQuery = Worker::query();
+		
+		// $filter = app()->make(WorkerFilter::class, ['params' => $data]);
         $filter = new WorkerFilter($data);
 
-		$filter->applyFilter($workerQuery);
+		$workerQuery = Worker::filter($filter);
+
+		// $filter->applyFilter($workerQuery);
 
         $workers = $workerQuery->paginate(4);
 

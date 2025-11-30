@@ -3,14 +3,18 @@
 namespace App\Models;
 
 use App\Events\Worker\CreateEvent;
+use App\Http\Filters\Var1\AbstractFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Profile;
+use App\Models\Traits\hasFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Worker extends Model
 {
 	use HasFactory;
+	use hasFilter;
 	use SoftDeletes;
 
 	protected $table = "workers";
