@@ -30,6 +30,24 @@ class WorkerController extends Controller
         return view('worker.index', compact('workers'));
     }
 
+	// filter 2
+	// public function index(IndexRequest $filter) {
+
+	// 	$workers = app()->make(Pipeline::class)
+	// 				->send(Worker::query())
+	// 				->through([
+	// 					Age::class,
+	// 					Name::class,
+	// 					From::class,
+	// 					To::class,
+	// 				])
+	// 				->thenReturn();
+
+	// 	$workers = $workers->paginate(4);
+
+	// 	return view('worker.index', compact('workers'));
+	// }
+
     public function show(Worker $worker)
     {
         return view('worker.show', compact('worker'));

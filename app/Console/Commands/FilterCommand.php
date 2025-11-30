@@ -13,7 +13,7 @@ class FilterCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:testfilter';
+    protected $signature = 'command:filter1';
 
     /**
      * The console command description.
